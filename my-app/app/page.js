@@ -39,7 +39,6 @@ export default function Home() {
           immagine="/images/immagine1.jpg"
         />
         <Footer />
-        <Extranet />
     </>
   );
 }
