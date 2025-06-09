@@ -1,5 +1,7 @@
 "use client";
 import Navbar from "@/components/Navbar"
+import Escursione2 from "@/components/Card";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const lingue = ["IT /", "EN /", "DE /", "FR /", "ES"];
@@ -28,7 +30,13 @@ export default function Home() {
         logoSrc={logoSrc}
         vociMenu={vociMenu}
       />
-      
+      <Escursione2
+          titolo="Presentazione"
+          descrizione="La nostra prima tappa, Murano, scopri perché l'isola è rinomata per le sue vetrerie con una visita a una fabbrica di vetro locale. Guarda un abile artigiano durante una dimostrazione della lavorazione del vetro. Successivamente, avrai circa un'ora sull'isola per fare shopping in uno dei tanti negozi di vetro."
+          disponibilita="1 aprile 2024"
+          immagine="/images/immagine1.jpg"
+        />
+        <Footer />
     </>
   );
 }

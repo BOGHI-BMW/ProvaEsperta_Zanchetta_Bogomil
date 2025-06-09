@@ -1,120 +1,138 @@
-import React, { useState } from "react";
+"use client";
 
-export default function Navbar({
-  lingue,
-  emailProfessionale,
-  telefonoProfessionale,
-  emailEscursioni,
-  telefonoEscursioni,
-  logoSrc,
-  vociMenu,
-}) {
-  const [menuOpen, setMenuOpen] = useState(false);
+import { useState } from "react";
+import Image from "next/image";
+
+export default function Navbar({ menuItems = [], menuDropdowns = {} }) {
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleDropdownClick = (dropdownKey) => {
+    setOpenDropdown(openDropdown === dropdownKey ? null : dropdownKey);
+  };
 
   return (
-    <header className="w-full">
-      {/* Barra superiore con lingue e contatti */}
-      <div className="bg-[#99006E] text-white text-sm py-2 flex justify-end px-6 z-20 relative">
-        <div className="space-x-2 flex items-center">
-          {lingue.map((lingua, index) => (
-            <span key={index} className="cursor-pointer hover:underline">
-              {lingua}
-            </span>
-          ))}
-        </div>
-        <div className="text-right whitespace-nowrap ml-6">
-          Servizi Professionali:{" "}
-          <a href={`mailto:${emailProfessionale}`} className="underline">
-            {emailProfessionale}
-          </a>{" "}
-          - {telefonoProfessionale} | Escursioni Giornaliere:{" "}
-          <a href={`mailto:${emailEscursioni}`} className="underline">
-            {emailEscursioni}
-          </a>{" "}
-          / {telefonoEscursioni}
-        </div>
+    <>
+      {/* Barra superiore Regione Veneto */}
+      <div className="bg-gray-200 text-black text-sm font-semibold px-4 py-2 w-full fixed top-0 left-0 z-50 text-center justify-center">
+        Regione Veneto
       </div>
 
-      {/* Navbar principale con logo e menu */}
-      <nav
-        className="bg-white shadow-md py-4 px-6 flex items-center justify-between relative z-10"
-        aria-label="Navigazione principale"
-      >
-        <img src={logoSrc} alt="Logo Doge di Venezia" className="h-20 w-20" />
+      {/* Navbar principale */}
+      <nav className="bg-gradient-to-r from-yellow-500 to-emerald-500 backdrop-blur-lg w-full flex items-center justify-between px-6 py-8 sm:px-8 lg:px-12 fixed top-[36px] z-40 shadow-2xl">
+        {/* Logo e scritte statiche */}
 
-        {/* Icona del menu per mobile */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden text-[#99006E] focus:outline-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6"
+        <div className="hidden lg:flex space-x-6 text-black font-semibold text-sm tracking-wide">
+          <a href="#">Homepage</a>
+          <a href="">SERVIZI</a>
+          <a href="#">PERCHE' L'IPAB</a>
+          <a href="#">I.P.A.B. informa</a>
+          <a href="#">Sostienici</a>
+          <a href="#">Accessi riservati</a>
+          <a href="#">Extranet</a>
+          <a href="#">PRIVACY</a>
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="lg:hidden">
+          <button
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-black hover:text-gray-700 focus:outline-none"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+            <svg
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
 
-        {/* Menu desktop */}
-        <ul className="hidden lg:flex space-x-6 ml-auto">
-          {vociMenu.map((voce) => (
-            <li key={voce.nome}>
-              <a
-                href={voce.href}
-                className={`hover:text-[#99006E] ${
-                  voce.nome === "Home Page"
-                    ? "text-[#99006E] font-bold"
-                    : voce.attivo
-                    ? "text-[#99006E] font-bold"
-                    : "text-gray-700"
-                }`}
-              >
-                {voce.nome}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* Menu mobile (apre da destra e occupa tutta la pagina) */}
-      <div
-        className={`lg:hidden fixed top-0 right-0 w-full h-full bg-white shadow-md transform transition-transform z-30 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <button
-          onClick={() => setMenuOpen(false)}
-          className="absolute top-4 left-4 text-[#99006E] text-2xl"
+        {/* Mobile Menu */}
+        <div
+          className={`lg:hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-40 ${
+            isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          } transition-all duration-300`}
         >
-          &times;
-        </button>
-        <ul className="py-4 px-6 space-y-4">
-          {vociMenu.map((voce) => (
-            <li key={voce.nome}>
-              <a
-                href={voce.href}
-                className={`block text-center hover:text-[#99006E] ${
-                  voce.nome === "Home Page"
-                    ? "text-[#99006E] font-bold"
-                    : voce.attivo
-                    ? "text-[#99006E] font-bold"
-                    : "text-gray-700"
-                }`}
+          <div className="absolute top-0 right-0 p-4">
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-white hover:text-gray-300 focus:outline-none"
+            >
+              <svg
+                className="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                {voce.nome}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </header>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="flex flex-col space-y-4 p-8 mt-16">
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              Homepage
+            </a>
+            <a
+              href=""
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              SERVIZI
+            </a>
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              PERCHE' L'IPAB
+            </a>
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              I.P.A.B. informa
+            </a>
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              Sostienici
+            </a>
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              Accessi riservati
+            </a>
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              Extranet
+            </a>
+            <a
+              href="#"
+              className="text-white text-xl font-medium hover:text-blue-300"
+            >
+              PRIVACY
+            </a>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }
