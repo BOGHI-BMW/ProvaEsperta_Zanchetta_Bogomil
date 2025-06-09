@@ -3,16 +3,10 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
-import {
-  FaPhone,
-  FaThumbtack,
-  FaCompass,
-  FaPaypal,
-} from "react-icons/fa";
 
 export default function Card({ titolo, descrizione, immagine }) {
   return (
-    <div className="container mx-auto mt-20 px-4">
+    <div className="container mx-auto mt-[300px] px-4">
       <Head>
         <title>{titolo}</title>
       </Head>
@@ -40,17 +34,17 @@ export default function Card({ titolo, descrizione, immagine }) {
 
         {/* Bottoni a destra */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:max-w-sm">
-          <button className="flex items-center justify-center gap-2 bg-sky-300 text-black text-lg font-bold py-6 rounded shadow">
-            <FaCompass /> Amministrazione trasparente
+          <button className="bg-sky-300 text-black text-lg font-bold py-6 rounded shadow text-center">
+            Amministrazione trasparente
           </button>
-          <button className="flex items-center justify-center gap-2 bg-sky-300 text-black text-lg font-bold py-6 rounded shadow">
-            <FaThumbtack /> Albo pretorio online
+          <button className="bg-sky-300 text-black text-lg font-bold py-6 rounded shadow text-center">
+            Albo pretorio online
           </button>
-          <button className="flex items-center justify-center gap-2 bg-sky-300 text-black text-lg font-bold py-6 rounded shadow">
-            <FaPhone /> Contatti
+          <button className="bg-sky-300 text-black text-lg font-bold py-6 rounded shadow text-center">
+            Contatti
           </button>
-          <button className="flex items-center justify-center gap-2 bg-sky-300 text-black text-lg font-bold py-6 rounded shadow">
-            <FaPaypal /> pagoPa
+          <button className="bg-sky-300 text-black text-lg font-bold py-6 rounded shadow text-center">
+            pagoPa
           </button>
         </div>
       </div>

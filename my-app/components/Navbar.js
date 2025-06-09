@@ -23,13 +23,13 @@ export default function Navbar({ menuItems = [], menuDropdowns = {} }) {
         {/* Logo e scritte statiche */}
 
         <div className="hidden lg:flex space-x-6 text-black font-semibold text-sm tracking-wide">
-          <a href="#">Homepage</a>
+          <a href="">Homepage</a>
           <a href="">SERVIZI</a>
           <a href="#">PERCHE' L'IPAB</a>
           <a href="#">I.P.A.B. informa</a>
           <a href="#">Sostienici</a>
           <a href="#">Accessi riservati</a>
-          <a href="#">Extranet</a>
+          <a href="extranet">Extranet</a>
           <a href="#">PRIVACY</a>
         </div>
 
